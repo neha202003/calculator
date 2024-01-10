@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        
+        width: 100%;
+        justify-content: center;
+        margin-top: 110px;
+        
+      
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background: rgb(31, 27, 27);
+      }
+
+      .container {
+        position: relative;
+        height: 440px;
+        width: 280px;
+        background-color: rgb(19, 17, 17);
+        /* box-shadow: 4px 5px 3px rgb(37, 34, 34), -4px -5px 3px rgb(37, 34, 34); */
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .container::before{
+          position: absolute;
+          width: 280px;
+          height: 440px;
+          top: -200px;
+          left: -140px;
+          content: '';
+          background: linear-gradient(0deg, transparent, #00ccff, #00ccff, #00ccff);
+          z-index: 1;
+          animation: anim 6s linear infinite;
+          animation-delay: -3s;
+          transform-origin: bottom right;
+
+      }
+      .container::after{
+          position: absolute;
+          width: 280px;
+          height: 440px;
+          top: -200px;
+          left: -140px;
+          content: '';
+          background: linear-gradient(0deg, transparent, #c5151b, #c5151b, #c5151b);
+          z-index: 1;
+          animation: anim 6s linear infinite;
+          
+          transform-origin: bottom right;
+
+      }
+      @keyframes anim {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .border{
+        position: absolute;
+        border-radius: 50px 5px;
+        inset: 5px;
+        
+        z-index: 2;
+        background: #0c1022;
+        display: flex;
+        flex-direction: column;
+      }
+
+      input {
+        position: relative;
+        margin-top: 30px;
+        margin-left: 30px;
+        border-radius: 2px;
+        height: 60px;
+        width: 220px;
+        background: none;
+        font-size: xx-large;
+        color: azure;
+        text-align: right;
+        padding: 2%;
+      }
+      button {
+        position: relative;
+        color: rgb(20, 20, 20);
+        margin-top: 20px;
+        margin-left: 18px;
+        height: 45px;
+        width: 43px;
+        border-radius: 50%;
+        font-size: 17px;
+        box-shadow: -3px -2px 4px gray;
+        border: none;
+        background-color: rgb(19, 17, 17);
+        color: aliceblue;
+        cursor: pointer;
+      }
+      ::placeholder {
+        color: white;
+      }
+      .equalbtn {
+        background-color: rgb(199, 78, 34);
+        box-shadow: none;
+      }
+
+      .ACbtn {
+        background-color: rgb(101, 150, 29);
+        box-shadow: none;
+      }
+      .Operator {
+        color: yellow;
+      }
+
+      @media (max-width: 296px) {
+        .container{
+          width: 100%;
+        }
+       
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="border">
+      <input type="text" placeholder="0" id="inputbox" />
+      <div class="row">
+        <button class="ACbtn">AC</button>
+        <button class="Operator">DEL</button>
+        <button class="Operator">/</button>
+        <button class="Operator">%</button>
+      </div>
+      <div class="row">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="Operator">*</button>
+      </div>
+      <div class="row">
+        <button <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="Operator">-</button>
+      </div>
+      <div class="row">
+        <button>3</button>
+        <button>2</button>
+        <button>1</button>
+        <button class="Operator">+</button>
+      </div>
+      <div class="row">
+        <button>00</button>
+        <button>0</button>
+        <button>.</button>
+        <button class="equalbtn">=</button>
+      </div>
+    </div>
+  </div>
+    <script>
+      let input = document.getElementById("inputbox");
+      let buttons = document.querySelectorAll("button");
+
+      let string = "";
+      let arr = Array.from(buttons);
+      arr.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          if (e.target.innerHTML == "=") {
+            // code to calculate and display the result here
+            string = eval(string);
+            input.value = string;
+          }
+          else if(e.target.innerHTML == 'AC'){
+            string = '';
+            input.value = string;
+
+          }
+          else if(e.target.innerHTML == 'DEL'){
+            string = string.substring( 0, string.length-1);
+            input.value = string;
+
+          }
+          else{
+          string = string + e.target.innerHTML;
+          input.value = string;
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
